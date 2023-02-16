@@ -6,7 +6,15 @@ final FULL_BUILD = params.FULL_BUILD
 final HOST_PROVISION = params.HOST_PROVISION
 
 final GIT_URL = 'https://github.com/FabianoCarneiro/pipelineAnsible'
-final NEXUS_URL = 'nexus.local:8081'
+final NEXUS_URL = 'nexus.local:8081'    agent {
+docker {
+    image 'node:lts-bullseye-slim' 
+    args '-p 3000:3000'
+docker {
+        image 'openjdk:11-jdk'
+        reuseNode true
+    }    
+}
 
 stage('Build') {
     node {
